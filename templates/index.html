@@ -8,35 +8,64 @@
     </head>
     <body>
     <h1>Signup</h1>
-        <form action="/welcome" method="post">
+        <form action="/validate" method="post">
             <table>
                 <tr>
                     <td><label for="username">Username</label></td>
                     <td>
+                        {% if username == "" %}
                         <input name="username" type="text" value="">
-                        <span class="error"></span>
+                        {% else %}
+                        <input name="username" type="text" value={{ username }}>
+                        {% endif %}
                     </td>
+                    {% if username_error != "" %}
+                    <td> 
+                    <p class="error"> {{ username_error }} </p> 
+                    </td>
+                    {% endif %}
+
                 </tr>
                 <tr>
                     <td><label for="password">Password</label></td>
                     <td>
                         <input name="password" type="password">
-                        <span class="error"></span>
                     </td>
+                    {% if password_error != "" %}
+                    <td> 
+                    <p class="error"> {{ password_error }} </p> 
+                    </td>
+                    {% endif %}
+
                 </tr>
                 <tr>
                     <td><label for="verify">Verify Password</label></td>
                     <td>
                         <input name="verify" type="password">
-                        <span class="error"></span>
                     </td>
+                    {% if verify_error != "" %}
+                    <td> 
+                    <p class="error"> {{ verify_error }} </p> 
+                    </td>
+                    {% endif %}
+
                 </tr>
                 <tr>
                     <td><label for="email">Email (optional)</label></td>
                     <td>
+                    {% if email == "" %}
                         <input name="email" value="">
-                        <span class="error"></span>
+                        {% else %}
+                        <input name="email" value={{ email }}>
+                        {% endif %}
+                        
                     </td>
+                    {% if email_error != "" %}
+                    <td> 
+                    <p class="error"> {{ email_error }} </p> 
+                    </td>
+                    {% endif %}
+
                 </tr>
             </table>
             <input type="submit" method="post">
