@@ -1,0 +1,29 @@
+body {
+  background: #007bff;
+  background: linear-gradient(to bottom, #042550, #0968a7);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.error {
+  color: red;
+}
+
+.form {
+  height: 50%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 12px;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+}

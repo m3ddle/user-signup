@@ -5,15 +5,24 @@
 from flask import Flask, request, redirect, render_template
 app = Flask(__name__)
 
-app.config['DEBUG'] = True      # displays runtime errors in the browser, too
+app.config['DEBUG'] = True      # displays runtime errors in the browser
 
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html")
+    username_error = ""
+    password_error = ""
+    verify_error = ""
+    email_error = ""
+
+    username = ""
+    password = ""
+    verify = ""
+    email = ""
+    return render_template("index.html", username_error=username_error, password_error=password_error, email_error=email_error, verify_error=verify_error, username=username, email=email)
 
 
-@app.route("/validate", methods=["POST"])
+@app.route("/welcome", methods=["POST"])
 def validate():
 
     username = request.form["username"]
@@ -25,6 +34,8 @@ def validate():
     password_error = ""
     verify_error = ""
     email_error = ""
+
+    # Error generators
 
     if username == "":
         username_error = "Name cannot be blank. "
@@ -62,6 +73,8 @@ def validate():
     elif "@" not in email or "." not in email or " " in email:
         email_error = email_error + "Please enter a valid email address. "
 
+    # redirect
+
     if not username_error and not password_error and not email_error and not verify_error:
         return render_template("welcome.html", username=username)
     else:
@@ -69,10 +82,6 @@ def validate():
                                email=email)
 
 
-@app.route("/welcome", methods=["POST"])
-def welcome():
-    username = request.form["username"]
-    return render_template("welcome.html", username=username)
+if __name__ == "__main__":
 
-
-app.run()
+    app.run()
